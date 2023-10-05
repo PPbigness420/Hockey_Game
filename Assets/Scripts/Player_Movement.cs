@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class Player_Movement : MonoBehaviour
 {
- 
-    void Start()
-    {
-               
-    }
-
-
+    public float speed;
     void Update()
     {
-        
-        var MousePos =Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        MousePos.z = 0;
-        GetComponent<Rigidbody2D>().MovePosition(MousePos);
+        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+
+        if (mousePos.x > 0)
+        {
+            mousePos.x = 0;
+        }
+
+        var finalPosition = Vector3.MoveTowards(transform.position, mousePos, speed * Time.deltaTime);
+        GetComponent<Rigidbody2D>().MovePosition(finalPosition);
     }
 }

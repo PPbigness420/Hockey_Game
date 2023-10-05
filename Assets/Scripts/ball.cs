@@ -8,28 +8,31 @@ public class ball : MonoBehaviour
     public TMP_Text Enemy_Score;
     private int Player_Score_Int;
     private int Enemy_Score_Int;
+    public AudioSource colide;
+    public AudioSource goalsfx;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
+    private void Start()
     {
         
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
         if (collision.gameObject.name.Contains("Goal"))
         {
             transform.position = Vector3.zero;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            goalsfx.Play();
+        }
+        else
+        {
+            colide.Play();
         }
         if (collision.gameObject.name.Contains("Goal R"))
         {
             Player_Score_Int++;
             Player_Score.text = Player_Score_Int.ToString();
-           
+
         }
         if (collision.gameObject.name.Contains("Goal L"))
         {
